@@ -124,7 +124,7 @@
 
 					url = "./twitter.php";
 					// Send the data using post
-					var posting = $.get( url, {pos_lat : locx, pos_long : locy, time_begin : date_debut, time_end : date_fin, radius : rayon/1000 }) ;
+					var posting = $.get( url, {pos_lat : locx, pos_long : locy, time_begin : date_debut, time_end : date_fin, radius : rayon/1000, filtre: filtre }) ;
 
 					console.log(posting.responseText);
 

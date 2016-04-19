@@ -9,10 +9,10 @@ function getConnectionWithAccessToken($oauth_token, $oauth_token_secret) {
 }
 
 
-function get_tweets($pos_lat, $pos_long, $time_begin, $time_end, $radius){
+function get_tweets($pos_lat, $pos_long, $time_begin, $time_end, $radius, $filtre){
   $connection = getConnectionWithAccessToken("3728801115-yJCRSR6GrWSWFS2aH9ijJMZbTbqqN0HsorX9Ffq", "vw3bG5cXvo2k7fInSvV4ISgioT1cQuMI4zc1X8XYaWAmF");
   $content = $connection->
-  get("search/tweets",["q" => "","since" => $time_begin,"until" => $time_end, "geocode" => $pos_lat.",".$pos_long.",".$radius."km"]);
+  get("search/tweets",["q" => $filtre,"since" => $time_begin,"until" => $time_end, "geocode" => $pos_lat.",".$pos_long.",".$radius."km"]);
 
   $data = json_encode((array)$content);
   return $data;
@@ -23,6 +23,7 @@ $pos_long = $_GET["pos_long"];
 $time_begin = $_GET["time_begin"];
 $time_end = $_GET["time_end"];
 $radius = $_GET["radius"];
+$filtre = $_GET["filtre"];
 
-print_r(get_tweets($pos_lat,$pos_long,$time_begin,$time_end,$radius));
+print_r(get_tweets($pos_lat,$pos_long,$time_begin,$time_end,$radius, $filtre));
 ?>

@@ -16,5 +16,5 @@ function get_tweets($pos_lat, $pos_long, $time_begin, $time_end, $radius){
   $data = json_encode((array)$content);
   return $data;
 }
-print_r(get_tweets(48.8246944,2.274335199999996,"2016-04-14","2016-04-15",20));
+// print_r(get_tweets(48.8246944,2.274335199999996,"2016-04-14","2016-04-15",20));
 ?>

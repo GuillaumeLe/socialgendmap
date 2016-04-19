@@ -391,7 +391,7 @@ map.on('dblclick', function(e) {
 
 			document.getElementById("locx").value=e.layer.getLatLng()["lat"];
 			document.getElementById("locy").value=e.layer.getLatLng()["lng"];
-			document.getElementById("rayon").value=e.layer.getRadius();
+			document.getElementById("rayon").value=e.layer.getRadius()/1000;
 
 
 
@@ -400,22 +400,24 @@ map.on('dblclick', function(e) {
 
         map.on('draw:edited', function (e) {
 
-			console.log(e);
-			document.getElementById("locx").value=e.layers._layers[80].getLatLng()["lat"];
-			document.getElementById("locy").value=e.layers._layers[80].getLatLng()["lng"];
-			document.getElementById("rayon").value=e.layers._layers[80].getRadius();
+  			for(var cercle in e.layers._layers)
+  			{
+  			console.log(cercle);
+  			document.getElementById("locx").value=e.layers._layers[cercle].getLatLng()["lat"];
+  			document.getElementById("locy").value=e.layers._layers[cercle].getLatLng()["lng"];
+  			document.getElementById("rayon").value=e.layers._layers[cercle].getRadius();
+  			}
+
+              var layers = e.layers;
+              var countOfEditedLayers = 0;
+              layers.eachLayer(function(layer) {
+                  countOfEditedLayers++;
+              });
 
 
-            var layers = e.layers;
-            var countOfEditedLayers = 0;
-            layers.eachLayer(function(layer) {
-                countOfEditedLayers++;
-            });
 
-
-
-            console.log("Edited " + countOfEditedLayers + " layers");
-        });
+              console.log("Edited " + countOfEditedLayers + " layers");
+          });
 
         // L.DomUtil.get('changeColor').onclick = function () {
         //     drawControl.setDrawingOptions({ rectangle: { shapeOptions: { color: '#004a80' } } });
@@ -425,5 +427,82 @@ map.on('dblclick', function(e) {
         var carteTwitter;
 			// couchetwitter(carteTwitter,map);
 
+      // marker accueil gie
+      	var gieMarker = L.Icon.extend({
+      		options: {
+              iconUrl: "icon/gie.png",
+              shadowUrl: null
+                  }
+      	});
+
+
+
+      	// marker accueil pn
+      	var pnMarker = L.Icon.extend({
+      		options: {
+              iconUrl: "icon/pn.png",
+              shadowUrl: null
+                  }
+      	});
+
+
+
+
+      //function add_accueil (accueil, map) {
+      	var unite="1";
+
+      // PRWSF - accueil du public police gie etalab
+          var accueil = new lvector.PRWSF({
+          url: "./js/restpostgis/",
+          geotable: "accueil",
+      	geomFieldName: "geom",
+      	fields: "service,nom,adresse,telephone",
+      	scaleRange: [12,19],
+      	popupTemplate : function(properties) {
+      			var output = "<h3>"+properties['nom']+"</h3>";
+      			output += properties['adresse'] +"<br />";
+      			output += "<a href='/dev/callr/html/CTC_essai.php?cible="+properties['telephone']+"&unite="+unite+"' target='_blank'>"+properties['telephone']+"</a>";
+      			return output;
+      	} ,
+      	showAll: false,
+      	symbology: {
+              type: "unique",
+      		property: "service",
+      		values: [
+      					{
+      						value: "GN",
+
+      						vectorOptions: {
+                                          icon: new gieMarker({
+                                              iconSize: new L.Point(20, 40),
+      										iconAnchor: new L.Point(10, 20),
+      										popupAnchor: new L.Point(0, 0)
+                                          }),
+      									opacity:1,
+                                          title: "{nom}"
+                                      }
+      					},{
+      						value: "PN",
+      						vectorOptions: {
+                                          icon: new pnMarker({
+                                              iconSize: new L.Point(54, 50),
+      										iconAnchor: new L.Point(27, 25),
+      										popupAnchor: new L.Point(0, 0)
+                                          }),
+      									opacity:1,
+                                          title: "{nom}"
+                                      }
+      					}	]
+      								}
+
+
+      });
+
+      	// affichage couche accueil public
+      	accueil.setMap(map);
+
+
+      // setTimeout(function() {accueil.setMap()},10000);
+      //add_accueil(map);
 
 </script>

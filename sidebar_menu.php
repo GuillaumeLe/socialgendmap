@@ -25,7 +25,7 @@
 				</p>
 				<p>Longitude :</br><INPUT type="text" name="locy" id="locy" autofocus value="2.5323486328125">
 				</p>
-				<p>Rayon de recherche :</br>
+				<p>Rayon de recherche : (km)</br>
 				<INPUT type="number" name="rayon" id="rayon" autofocus value="73696.8450589714">
 				</p>
                 <p>Date de début :</br>
@@ -96,6 +96,47 @@
 					});
 
 				});
+				
+	//handler click sur résultat BAN
+	$(document).on('click', '#ban-table tr', function() {
+    $(this).closest("tr").siblings().removeClass("highlighted");
+    $(this).toggleClass("highlighted");
+	var x = $(this).find('td').first().text();
+	var y = $(this).find('td').last().text();
+	var nom = $(this).find('.nom').text();
+    map.setView([y, x],16);
+	L.marker([y, x]).addTo(map).bindPopup("<STRONG>"+nom+"</STRONG></BR>DÂ°D LAT : "+y+" - LONG : "+x+"</BR>DÂ°M.M' LAT : "+ConvertDDToDMM(y)+" - LONG : "+ConvertDDToDMM(x)+"</BR>DÂ°M'S'' LAT : "+ConvertDDToDMS(y)+" - LONG : "+ConvertDDToDMS(x));
+	document.getElementById("locy").value=y;
+	document.getElementById("locx").value=x;
+	//document.location.replace("./gendloc.php#social");
+	});
+	
+    //handler click sur résultat nominatim
+	$(document).on('click', '#nominatim-table tr', function() {
+    $(this).closest("tr").siblings().removeClass("highlighted");
+    $(this).toggleClass("highlighted");
+	var y = $(this).find('td').first().text();
+	var x = $(this).find('td').last().text();
+	var nom = $(this).find('.nom').text();
+    map.setView([y, x],16);
+	L.marker([y, x]).addTo(map).bindPopup("<STRONG>"+nom+"</STRONG></BR>D°D LAT : "+y+" - LONG : "+x+"</BR>D°M.M' LAT : "+ConvertDDToDMM(y)+" - LONG : "+ConvertDDToDMM(x)+"</BR>D°M'S'' LAT : "+ConvertDDToDMS(y)+" - LONG : "+ConvertDDToDMS(x));
+	document.getElementById("locy").value=y;
+	document.getElementById("locx").value=x;
+	});	
+	
+	//handler click sur résultat topo
+	$(document).on('click', '#res_topo tr', function() {
+    $(this).closest("tr").siblings().removeClass("highlighted");
+    $(this).toggleClass("highlighted");
+	var x = $(this).find('td').first().text();
+	var y = $(this).find('td').last().text();
+	var nom = $(this).find('.nom').text();
+    map.setView([y, x],16);
+	L.marker([y, x]).addTo(map).bindPopup("<STRONG>"+nom+"</STRONG></BR>D°D LAT : "+y+" - LONG : "+x+"</BR>D°M.M' LAT : "+ConvertDDToDMM(y)+" - LONG : "+ConvertDDToDMM(x)+"</BR>D°M'S'' LAT : "+ConvertDDToDMS(y)+" - LONG : "+ConvertDDToDMS(x));
+	document.getElementById("locy").value=y;
+	document.getElementById("locx").value=x;
+	});
+				
 				</script>
 
 <!-- ===========================================================================================================================================================================================
@@ -124,9 +165,9 @@
 
 					url = "./twitter.php";
 					// Send the data using post
-					var posting = $.get( url, {pos_lat : locx, pos_long : locy, time_begin : date_debut, time_end : date_fin, radius : rayon/1000, filtre: filtre }) ;
+					var posting = $.get( url, {pos_lat : locx, pos_long : locy, time_begin : date_debut, time_end : date_fin, radius : rayon, filtre: filtre }) ;
 
-					console.log(posting.responseText);
+					console.log(posting);
 
 					//console.log(posting.responseText);
 					setTimeout( function(){var JJtweets;

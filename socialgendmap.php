@@ -89,10 +89,11 @@
 	<link rel="stylesheet" href="./js/leaflet.markercluster/dist/MarkerCluster.Default.css" />
 	<script src="./js/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
 
+  <link rel="stylesheet" href="/css/style.css"/>
 
 <!-- twitter -->
 
-	
+
 
     <style>
       body {

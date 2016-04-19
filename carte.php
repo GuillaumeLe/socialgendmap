@@ -64,7 +64,16 @@
 
 map.doubleClickZoom.disable();
 
+var twitterIcon = L.icon({
+    iconUrl: 'icon/twitter-icon.png',
+    shadowUrl: null,
 
+    iconSize:     [40, 40], // size of the icon
+//    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [20, 0], // point of the icon which will correspond to marker's location
+//    shadowAnchor: [4, 62],  // the same for the shadow
+//    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
 
 function traceLayer(nomlayer,donnees,map)
 {
@@ -73,7 +82,9 @@ var ligne=0;
 var points=[];
 	for( ligne=0; ligne<donnees.length ;ligne++)
 	{
-		nomlayer.addLayer( L.marker( [ donnees[ligne]["locx"],donnees[ligne]["locy"] ]).bindPopup( dessinepopup(donnees[ligne])));
+	   //L.marker( [ donnees[ligne]["locx"],donnees[ligne]["locy"] ],{icon: twitterIcon}).addTo(map);
+
+	   nomlayer.addLayer( L.marker( [ donnees[ligne]["locx"],donnees[ligne]["locy"] ], {icon: twitterIcon} ).bindPopup( dessinepopup(donnees[ligne])));
 	}
 
 
@@ -92,17 +103,18 @@ nomlayer.on('clusterclick', function (e) {ecritSidePanel(e);});
 
 function dessinepopup(texte)
 {
-	bulle=texte["contenu"];
+	bulle="<div class='tweet'><p>";
+	bulle+=texte["contenu"];
 	bulle+= '<hr/>';
 	bulle+= 'Date: ' + texte["date"] + " ; ";
 	bulle+= 'x:' + texte["locx"] + ' ; y:' + texte["locy"] + '<br/>';
 	bulle+='Utilisateur: ' + texte["user"] + "<br/>";
 	bulle+='URL: ' + texte["url"] + "<br/>";
 	bulle+='<hr/>';
-	bulle+='<a class="btn btn-danger" href="#"><i class="fa fa-star-o fa-3x"></i></a>';
-	bulle+='<a class="btn btn-danger" href="#"><i class="fa fa-envelope-o fa-3x"></i></a>'; // enlever si mail est vide
-	bulle+='<a class="btn btn-danger" href="#"><i class="fa fa-trash-o fa-3x"></i></a>';
-
+	bulle+='<a class="btn btn-star" href="#"><i class="fa fa-star-o fa-3x"></i></a>';
+	bulle+='<a class="btn btn-envelope" target=_blank href="'+texte['url']+'"><i class="fa fa-envelope-o fa-3x"></i></a>'; // enlever si mail est vide
+	bulle+='<a class="btn btn-trash" href="#"><i class="fa fa-trash-o fa-3x"></i></a>';
+	bulle+="</p></div>";
 
 	return bulle;
 
@@ -287,42 +299,6 @@ function ecritSidePanel(carte)
   });
 
 
-/*
-// fonction permettant, au moment o� l'on clique sur une ligne du tableau contenant les r�sultats de recherche pour NOMINATIM, de faire apparaitre le marker en y incluant un popup qui apparait lorsqu'on clique sur le marker
-	$(document).on('click', '#nominatim-table tr', function() {
-      $(this).closest("tr").siblings().removeClass("highlighted");
-      $(this).toggleClass("highlighted");
-      // r�cup�ration des donn�es pr�sentes dans les class de searchResult.html.twig
-	    var y = $(this).find('.lat').text();
-	    var x = $(this).find('.lng').text();
-	    var nom = $(this).find('.nom').text();
-      map.setView([y, x],16);
-	    L.marker([y, x]).addTo(map).bindPopup("<STRONG>"+nom+"</STRONG></BR>D°D LAT : "+y+" - LONG : "+x+"</BR>D°M.M' LAT : "+ConvertDDToDMM(y)+" - LONG : "+ConvertDDToDMM(x)+"</BR>D°M'S'' LAT : "+ConvertDDToDMS(y)+" - LONG : "+ConvertDDToDMS(x));
-	});
-
-
-
-// fonction permettant, au moment o� l'on clique sur une ligne du tableau contenant les r�sultats de g�oloc, de faire apparaitre le marker de g�oloc en y incluant un popup qui apparait lorsqu'on clique sur le marker
-$(document).on('click', '#res_loc tr', function() {
-    $(this).closest("tr").siblings().removeClass("highlighted");
-    $(this).toggleClass("highlighted");
-    // r�cup�ration des donn�es pr�sentes dans les class de smsloc.html.twig
-    var x = $(this).find('.lng').text();
-	var y = $(this).find('.lat').text();
-	var tel = $(this).find('.tel').text();
-	var alt = $(this).find('.alt').text();
-	var heure = $(this).find('.heure').text();
-	var com = $(this).find('.com').text();
-    var bp = $(this).find('.bp').text();
-	if (x) {
-    	map.setView([y, x],13);
-    	L.marker([y, x],{icon: pulsingIcon}).addTo(map).bindPopup("<STRONG> G&eacuteolocalisation de "+heure+"</STRONG></BR>D°D LAT : "+y+" - LONG : "+x+"</BR>D°M.M' LAT : "+ConvertDDToDMM(y)+" - LONG : "+ConvertDDToDMM(x)+"</BR>D°M'S'' LAT : "+ConvertDDToDMS(y)+" - LONG : "+ConvertDDToDMS(x)+"</br> T&eacutel&eacutephone : "+tel+"</br> Altitude : "+alt+" m</br> Commune : "+com+"</br> Unit&eacute comp&eacutetente : "+bp);
-	}
-});
-
-*/
-
-
 
 // le double clique affiche les coordonn�es
 map.on('dblclick', function(e) {
@@ -343,14 +319,6 @@ map.on('dblclick', function(e) {
 
 			});
  // Set the title to show on the polygon button
-
-
-
-
-
-
-
-
 
 
 
@@ -504,5 +472,25 @@ map.on('dblclick', function(e) {
 
       // setTimeout(function() {accueil.setMap()},10000);
       //add_accueil(map);
+
+
+var carteTwitter=null;
+
+function handlerGendarmerie(cb)
+{
+  if(cb.name==="cb-gendarmerie" && cb.checked)
+  {
+    	accueil.setMap(map);
+  }
+  else if (cb.name==="cb-gendarmerie" && !cb.checked)
+{
+  accueil.setMap()
+}
+
+
+}
+
+
+
 
 </script>

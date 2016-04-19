@@ -1,0 +1,78 @@
+div.tweet
+{
+  display:inline-block;
+  width:250px;
+
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top:0px;
+  padding-bottom:5px;
+
+  
+  margin-left: 10px;
+  margin-right: 2px;
+  margin-top:5px;
+  margin-bottom:5px;
+
+  background-color: #ecf0f1;/*cloud*/
+
+
+  text-align:justify;
+}
+
+
+.tweet hr
+ {
+    display: block;
+    margin: 5px 0 5px;
+    padding: 0;
+    height: 1px;
+    color:#2980b9; /*bleu swag*/
+    text-align: center;
+    font-size: 60px;
+}
+
+
+.tweet .fa
+{
+  color:#2980b9;  /*bleu swag*/
+}
+
+
+.btn
+{
+  display:inline-block;
+
+}
+
+
+.btn-envelope
+{
+  text-align: center;
+  margin-left:74px;
+}
+
+
+.btn-trash
+{
+  float:right;
+}
+
+
+
+.leaflet-clickable
+{
+	fill:#2980b9;
+	stroke:#2980b9;
+	stroke-width:2;
+	
+	
+	
+	
+}
+
+
+
+
+
+

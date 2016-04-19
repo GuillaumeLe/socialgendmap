@@ -316,6 +316,7 @@ map.on('dblclick', function(e) {
         var drawControl = new L.Control.Draw({
             position: 'topright',
             draw: {
+              rectangle: false,
                 polyline: false,
                 polygon: false,
                 circle: true,
@@ -342,7 +343,7 @@ map.on('dblclick', function(e) {
 
 			document.getElementById("locx").value=e.layer.getLatLng()["lat"];
 			document.getElementById("locy").value=e.layer.getLatLng()["lng"];
-			document.getElementById("rayon").value=e.layer._radius;
+			document.getElementById("rayon").value=e.layer.getRadius();
 
 
 
@@ -366,7 +367,7 @@ map.on('dblclick', function(e) {
         // L.DomUtil.get('changeColor').onclick = function () {
         //     drawControl.setDrawingOptions({ rectangle: { shapeOptions: { color: '#004a80' } } });
         // };
-        // 
+        //
 
 
 

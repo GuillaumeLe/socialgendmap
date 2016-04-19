@@ -42,43 +42,43 @@
 <!-- Draw circle -->
 
 
-	<script src="./js/leaflet-draw/dist/Leaflet.draw.js"></script>
+	<script src="./js/leaflet-draw/dist/leaflet.draw.js"></script>
 	<link rel="stylesheet" href="./js/leaflet-draw/dist/leaflet.draw.css" />
 
-	<script src="./js/Leaflet-draw/src/Toolbar.js"></script>
-	<script src="./js/Leaflet-draw/src/Tooltip.js"></script>
-                             
-	<script src="./js/Leaflet-draw/src/ext/GeometryUtil.js"></script>
-	<script src="./js/Leaflet-draw/src/ext/LatLngUtil.js"></script>
-	<script src="./js/Leaflet-draw/src/ext/LineUtil.Intersect.js"></script>
-	<script src="./js/Leaflet-draw/src/ext/Polygon.Intersect.js"></script>
-	<script src="./js/Leaflet-draw/src/ext/Polyline.Intersect.js"></script>
-	<script src="./js/Leaflet-draw/src/ext/TouchEvents.js"></script>
-                             
-	<script src="./js/Leaflet-draw/src/draw/DrawToolbar.js"></script>
-	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Feature.js"></script>
-	<script src="./js/Leaflet-draw/src/draw/handler/Draw.SimpleShape.js"></script>
-	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Polyline.js"></script>
-	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Circle.js"></script>
-	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Marker.js"></script>
-	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Polygon.js"></script>
-	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Rectangle.js"></script>
+	<script src="./js/leaflet-draw/src/Toolbar.js"></script>
+	<script src="./js/leaflet-draw/src/Tooltip.js"></script>
+
+	<script src="./js/leaflet-draw/src/ext/GeometryUtil.js"></script>
+	<script src="./js/leaflet-draw/src/ext/LatLngUtil.js"></script>
+	<script src="./js/leaflet-draw/src/ext/LineUtil.Intersect.js"></script>
+	<script src="./js/leaflet-draw/src/ext/Polygon.Intersect.js"></script>
+	<script src="./js/leaflet-draw/src/ext/Polyline.Intersect.js"></script>
+	<script src="./js/leaflet-draw/src/ext/TouchEvents.js"></script>
+
+	<script src="./js/leaflet-draw/src/draw/DrawToolbar.js"></script>
+	<script src="./js/leaflet-draw/src/draw/handler/Draw.Feature.js"></script>
+	<script src="./js/leaflet-draw/src/draw/handler/Draw.SimpleShape.js"></script>
+	<script src="./js/leaflet-draw/src/draw/handler/Draw.Polyline.js"></script>
+	<script src="./js/leaflet-draw/src/draw/handler/Draw.Circle.js"></script>
+	<script src="./js/leaflet-draw/src/draw/handler/Draw.Marker.js"></script>
+	<script src="./js/leaflet-draw/src/draw/handler/Draw.Polygon.js"></script>
+	<script src="./js/leaflet-draw/src/draw/handler/Draw.Rectangle.js"></script>
 
 
-	<script src="./js/Leaflet-draw/src/edit/EditToolbar.js"></script>
-	<script src="./js/Leaflet-draw/src/edit/handler/EditToolbar.Edit.js"></script>
-	<script src="./js/Leaflet-draw/src/edit/handler/EditToolbar.Delete.js"></script>
-                             
-	<script src="./js/Leaflet-draw/src/Control.Draw.js"></script>
-                             
-	<script src="./js/Leaflet-draw/src/edit/handler/Edit.Poly.js"></script>
-	<script src="./js/Leaflet-draw/src/edit/handler/Edit.SimpleShape.js"></script>
-	<script src="./js/Leaflet-draw/src/edit/handler/Edit.Rectangle.js"></script>
-	<script src="./js/Leaflet-draw/src/edit/handler/Edit.Marker.js"></script>
-	
-	
-	<script src="./js/Leaflet-draw/src/edit/handler/Edit.Circle.js"></script>
-	<script src="./js/Leaflet-draw/src/Control.Draw.js"></script>
+	<script src="./js/leaflet-draw/src/edit/EditToolbar.js"></script>
+	<script src="./js/leaflet-draw/src/edit/handler/EditToolbar.Edit.js"></script>
+	<script src="./js/leaflet-draw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+	<script src="./js/leaflet-draw/src/Control.Draw.js"></script>
+
+	<script src="./js/leaflet-draw/src/edit/handler/Edit.Poly.js"></script>
+	<script src="./js/leaflet-draw/src/edit/handler/Edit.SimpleShape.js"></script>
+	<script src="./js/leaflet-draw/src/edit/handler/Edit.Rectangle.js"></script>
+	<script src="./js/leaflet-draw/src/edit/handler/Edit.Marker.js"></script>
+
+
+	<script src="./js/leaflet-draw/src/edit/handler/Edit.Circle.js"></script>
+	<script src="./js/leaflet-draw/src/Control.Draw.js"></script>
 
 <!-- maker cluster-->
 
@@ -88,9 +88,9 @@
 	<link rel="stylesheet" href="./js/leaflet.markercluster/dist/MarkerCluster.css" />
 	<link rel="stylesheet" href="./js/leaflet.markercluster/dist/MarkerCluster.Default.css" />
 	<script src="./js/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-	
-	
-	
+
+
+
 
     <style>
       body {
@@ -103,10 +103,10 @@
       font-size: 12px;
       }
     </style>
-     
+
   </head>
   <body>
-  
+
   <script>
  L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a circle!';
 
@@ -145,14 +145,14 @@
             console.log("Edited " + countOfEditedLayers + " layers");
         });
 
-        L.DomUtil.get('changeColor').onclick = function () {
-            drawControl.setDrawingOptions({ rectangle: { shapeOptions: { color: '#004a80' } } });
-        };
-		
+        // L.DomUtil.get('changeColor').onclick = function () {
+        //     drawControl.setDrawingOptions({ rectangle: { shapeOptions: { color: '#004a80' } } });
+        // };
+
   </script>
-  
-  
-  
+
+
+
       <script>
     //{# Définitions des fonctions utilisées par la carte #}
     function ConvertDDToDMS(D){
@@ -166,8 +166,8 @@
     	return [sign,Math.abs(0|D), '° ', ((D<0?D=-D:D)%1*60).toFixed(3), "' "].join('');
     }
     </script>
-  
-   
+
+
     <!-- {% block body %} {# Définitions du bloc body qui contient la sidebar et la carte #}-->
 
 
@@ -179,7 +179,7 @@
         <?php include('carte.php') ?>
     <!--  {% endblock %}-->
 
-   
+
     <!-- {% endblock %} -->
   </body>
 </html>

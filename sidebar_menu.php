@@ -6,7 +6,7 @@
         <ul class="sidebar-tabs" role="tablist">
             <li><a href="#social" role="tab"><i class="fa fa-users"></i></a></li>
             <li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
-						<li><a href="#result" role="tab"><i class="fa fa-search"></i></a></li>
+						<li><a href="#solution" role="tab"><i class="icon-archive"></i></a></li>
 	    </ul>
 
         <!-- Tab panes -->
@@ -102,8 +102,10 @@
 //========================================================================================================================================================================================= -->
 
 			</div>
-			<div class="sidebar-pane" id="result">
+			<div class="sidebar-pane" id="solution">
 				<h1>Resultats</h1>
+				<div class="sidebar-pane"id="results">
+				</div>
 		  </div>
 
 </div>

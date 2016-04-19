@@ -26,9 +26,8 @@
 <script src="./js/intl-tel-input/build/js/intlTelInput.js"></script>
 <link rel="stylesheet" href="./js/intl-tel-input/build/css/intlTelInput.css">
 <!--bibliothèque styledLayerControl pour affichage menu couches geo-->
-<script src="./js/Leaflet.markercluster/build.js"></script>
-<script src="./js/Leaflet.markercluster/deps.js"></script>
-<script src="./js/Leaflet.markercluster/hintrc.js"></script>
+
+
 <script src="./js/Leaflet.StyledLayerControl/src/styledLayerControl.js"></script>
  <link rel="stylesheet" href="./js/Leaflet.StyledLayerControl/css/styledLayerControl.css" />
 <!--bibliothèque leaflet-ajax-->
@@ -39,14 +38,60 @@
 <script src="http://pghm-isere.com/gendloc/js/leaflet-pulse/L.Icon.Pulse.js"></script>
 <link rel="stylesheet" href="http://pghm-isere.com/gendloc/js/leaflet-pulse/L.Icon.Pulse.css" />
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<!-- Draw circle -->
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+	<script src="./js/leaflet-draw/dist/Leaflet.draw.js"></script>
+	<link rel="stylesheet" href="./js/leaflet-draw/dist/leaflet.draw.css" />
+
+	<script src="./js/Leaflet-draw/src/Toolbar.js"></script>
+	<script src="./js/Leaflet-draw/src/Tooltip.js"></script>
+                             
+	<script src="./js/Leaflet-draw/src/ext/GeometryUtil.js"></script>
+	<script src="./js/Leaflet-draw/src/ext/LatLngUtil.js"></script>
+	<script src="./js/Leaflet-draw/src/ext/LineUtil.Intersect.js"></script>
+	<script src="./js/Leaflet-draw/src/ext/Polygon.Intersect.js"></script>
+	<script src="./js/Leaflet-draw/src/ext/Polyline.Intersect.js"></script>
+	<script src="./js/Leaflet-draw/src/ext/TouchEvents.js"></script>
+                             
+	<script src="./js/Leaflet-draw/src/draw/DrawToolbar.js"></script>
+	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Feature.js"></script>
+	<script src="./js/Leaflet-draw/src/draw/handler/Draw.SimpleShape.js"></script>
+	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Polyline.js"></script>
+	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Circle.js"></script>
+	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Marker.js"></script>
+	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Polygon.js"></script>
+	<script src="./js/Leaflet-draw/src/draw/handler/Draw.Rectangle.js"></script>
+
+
+	<script src="./js/Leaflet-draw/src/edit/EditToolbar.js"></script>
+	<script src="./js/Leaflet-draw/src/edit/handler/EditToolbar.Edit.js"></script>
+	<script src="./js/Leaflet-draw/src/edit/handler/EditToolbar.Delete.js"></script>
+                             
+	<script src="./js/Leaflet-draw/src/Control.Draw.js"></script>
+                             
+	<script src="./js/Leaflet-draw/src/edit/handler/Edit.Poly.js"></script>
+	<script src="./js/Leaflet-draw/src/edit/handler/Edit.SimpleShape.js"></script>
+	<script src="./js/Leaflet-draw/src/edit/handler/Edit.Rectangle.js"></script>
+	<script src="./js/Leaflet-draw/src/edit/handler/Edit.Marker.js"></script>
+	
+	
+	<script src="./js/Leaflet-draw/src/edit/handler/Edit.Circle.js"></script>
+
+
+
+<!-- maker cluster-->
+
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="./js/leaflet.markercluster/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="./js/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+	<script src="./js/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+	
+	
+	
 
     <style>
       body {
@@ -59,7 +104,7 @@
       font-size: 12px;
       }
     </style>
-
+     
   </head>
   <body>
       <script>
@@ -75,8 +120,8 @@
     	return [sign,Math.abs(0|D), '° ', ((D<0?D=-D:D)%1*60).toFixed(3), "' "].join('');
     }
     </script>
-
-
+  
+   
     <!-- {% block body %} {# Définitions du bloc body qui contient la sidebar et la carte #}-->
 
 
@@ -88,7 +133,7 @@
         <?php include('carte.php') ?>
     <!--  {% endblock %}-->
 
-
+   
     <!-- {% endblock %} -->
   </body>
 </html>

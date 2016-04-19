@@ -54,17 +54,21 @@
 
 
   // La carte Leaflet #}
+
   var map = L.map("map", {
       center: new L.LatLng(center_y, center_x),
       zoom: 5,
 	  maxZoom:16
   });
+
+
 map.doubleClickZoom.disable();
 
 
 
 function traceLayer(nomlayer,donnees,map)
 {
+// place chaque marker
 var ligne=0;
 var points=[];
 	for( ligne=0; ligne<donnees.length ;ligne++)
@@ -73,10 +77,14 @@ var points=[];
 	}
 
 
-
+// écrit l'ensemble des markers dans le side_panel
 afficheTexteLayer(donnees);
 
 map.addLayer(nomlayer);
+
+// handler pour afficher le texte quand on clique sur les clusters
+nomlayer.on('clusterclick', function (e) {ecritSidePanel(e);});
+
 
 
 
@@ -142,22 +150,19 @@ function contenuCluster(e)
 	console.log(e);
 
 
-	if(e._childClusters.length ==0) // on est pas dans un cluster
-	{
-		for(ligne=0;ligne<e._markers.length;ligne++)
-				{
-					contenu+=e._markers[ligne]._popup._content+"<br/><br/>";
-				}
-	}
-	else
-	{
-		for (ligne=0;ligne<e._childClusters.length;ligne++)
-		{
 
-			contenu+=contenuCluster(e._childClusters[ligne]);
+	for (ligne=0;ligne<e._childClusters.length;ligne++)
+	{
 
-		}
+		contenu+=contenuCluster(e._childClusters[ligne]);
+
 	}
+
+	for(ligne=0;ligne<e._markers.length;ligne++)
+	{
+		contenu+=e._markers[ligne]._popup._content+"<br/><br/>";
+	}
+
 
 
 		return contenu;
@@ -186,26 +191,6 @@ function ecritSidePanel(carte)
 }
 
 
-		cartebidon.on('clusterclick', function (e) {
-
-			//twitter_layer.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-			//alert('cluster ' + a.layer.getAllChildMarkers().length);
-
-
-				// ATTENTION AU ZERO, c'est un tavbleau a balayer
-
-				var contenu="<b>Nombre elements: "+ e.layer._childCount+"</b><br/><br/>";
-				contenu+=contenuCluster(e.layer);
-
-
-			document.getElementById("results").innerHTML =contenu;
-
-			/*L.popup()
-				.setLatLng(e.latlng)
-				.setContent(contenu)
-				.openOn(map);*/
-
-		});
 
 
 //map.removeLayer(cities);
@@ -437,6 +422,8 @@ map.on('dblclick', function(e) {
         // };
         //
 
+        var carteTwitter;
+			// couchetwitter(carteTwitter,map);
 
 
 </script>

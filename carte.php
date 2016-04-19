@@ -6,7 +6,6 @@
 
 
 
-
   // Cle API Geoportail #}
   var apiKey = "XXXXXXXXXXXXXXXXXXXXXXXX";
   
@@ -60,10 +59,9 @@
   var map = L.map("map", {
       center: new L.LatLng(center_y, center_x),
       zoom: 5,
-      doubleClickZoom: false,
 	  maxZoom:16
   });
-
+map.doubleClickZoom.disable(); 
 
 
 
@@ -115,16 +113,36 @@ donnees=[{locx:40.65 , locy: -105.02,contenu:"test",date:"aujourd'hui"},
 
 
 ];
-var twitter_layer=L.markerClusterGroup();
+var twitter_layer=L.markerClusterGroup({ 
+   spiderfyOnMaxZoom: false,
+    showCoverageOnHover: false,
+    zoomToBoundsOnClick: false});
+	
+	
 traceLayer(twitter_layer,donnees,map);
 
 L.circle([40.65, -104.02], 50000).addTo(map);
 
 
-		twitter_layer.on('clusterclick', function (a) {
+		twitter_layer.on('clusterclick', function (e) {
 
 			//twitter_layer.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 			//alert('cluster ' + a.layer.getAllChildMarkers().length);
+			
+
+				// ATTENTION AU ZERO, c'est un tavbleau a balayer
+				
+				var contenu="<b>nb element: "+ e.layer._childClusters[0]._childCount+"</b><br/><br/>";
+				var ligne=0;
+				
+				for(ligne=0;ligne<e.layer._childClusters[0]._childCount;ligne++)
+				{
+					contenu+=e.layer._childClusters[0]._markers[ligne]._popup._content+"<br/><br/>";
+				}
+			L.popup()
+				.setLatLng(e.latlng)
+				.setContent(contenu)
+				.openOn(map);
 			
 		});
 
@@ -256,16 +274,100 @@ $(document).on('click', '#res_loc tr', function() {
 	}
 });
 
-
+		
+		
 // le double clique affiche les coordonnées
 map.on('dblclick', function(e) {
-    L.popup()
+/*   
+   L.popup()
 				.setLatLng(e.latlng)
 				.setContent("lat : "+e.latlng.lat+"</br> lon : "+e.latlng.lng)
-				.openOn(map);
+				.openOn(map);*/
+				
 				document.getElementById("locy").value=e.latlng.lng;
 				document.getElementById("locx").value=e.latlng.lat;
-   	//L.marker([y, x]/*,{icon: pulsingIcon}*/).addTo(map).bindPopup("lat : "+y+"</br> lon : "+x);
-			});
 
+
+
+   	//L.marker([y, x]/*,{icon: pulsingIcon}*/).addTo(map).bindPopup("lat : "+y+"</br> lon : "+x);
+			new L.Draw.Circle(map, drawControl.options.Circle).enable();
+  
+	
+			});
+ // Set the title to show on the polygon button
+       
+
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+
+        // Set the title to show on the polygon button
+        L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a circle!';
+
+        var drawControl = new L.Control.Draw({
+            position: 'topright',
+            draw: {
+                polyline: false,
+                polygon: false,
+                circle: true,
+                marker: false
+            },
+            edit: {
+                featureGroup: drawnItems,
+                remove: true
+            }
+        });
+        map.addControl(drawControl);
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+
+				
+            if (type === 'marker') {
+                layer.bindPopup('A popup!');
+            }
+
+            drawnItems.addLayer(layer);
+			console.log(e.layer.getLatLng());
+			
+			document.getElementById("locx").value=e.layer.getLatLng()["lat"];
+			document.getElementById("locy").value=e.layer.getLatLng()["lng"];	
+			document.getElementById("rayon").value=e.layer._radius;	
+
+			
+
+		
+        });
+
+        map.on('draw:edited', function (e) {
+            var layers = e.layers;
+            var countOfEditedLayers = 0;
+            layers.eachLayer(function(layer) {
+                countOfEditedLayers++;
+            });
+			
+			document.getElementById("locx").value=e.layer.getLatLng()["lat"];
+			document.getElementById("locy").value=e.layer.getLatLng()["lng"];	
+			document.getElementById("rayon").value=e.layer._radius;	
+			
+            console.log("Edited " + countOfEditedLayers + " layers");
+        });
+
+        L.DomUtil.get('changeColor').onclick = function () {
+            drawControl.setDrawingOptions({ rectangle: { shapeOptions: { color: '#004a80' } } });
+        };
+		
+
+		
+		
 </script>

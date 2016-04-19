@@ -78,8 +78,7 @@
 	
 	
 	<script src="./js/Leaflet-draw/src/edit/handler/Edit.Circle.js"></script>
-
-
+	<script src="./js/Leaflet-draw/src/Control.Draw.js"></script>
 
 <!-- maker cluster-->
 
@@ -107,6 +106,53 @@
      
   </head>
   <body>
+  
+  <script>
+ L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a circle!';
+
+        var drawControl = new L.Control.Draw({
+            position: 'topright',
+            draw: {
+                polyline: false,
+                polygon: false,
+                circle: true,
+                marker: false
+            },
+            edit: {
+                featureGroup: drawnItems,
+                remove: true
+            }
+        });
+        map.addControl(drawControl);
+
+        map.on('draw:created', function (e) {
+            var type = e.layerType,
+                layer = e.layer;
+			console.log(e);
+            if (type === 'marker') {
+                layer.bindPopup('A popup!');
+            }
+
+            drawnItems.addLayer(layer);
+        });
+
+        map.on('draw:edited', function (e) {
+            var layers = e.layers;
+            var countOfEditedLayers = 0;
+            layers.eachLayer(function(layer) {
+                countOfEditedLayers++;
+            });
+            console.log("Edited " + countOfEditedLayers + " layers");
+        });
+
+        L.DomUtil.get('changeColor').onclick = function () {
+            drawControl.setDrawingOptions({ rectangle: { shapeOptions: { color: '#004a80' } } });
+        };
+		
+  </script>
+  
+  
+  
       <script>
     //{# Définitions des fonctions utilisées par la carte #}
     function ConvertDDToDMS(D){

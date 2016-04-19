@@ -2,24 +2,31 @@
 
 function twitter2format(raw)
 {
+	raw=raw["statuses"];
 	format=[];
 	var ligne=0;
 
-	for( ligne=0; ligne<raw.length ;ligne++)
+	for( i=0; i<raw.length ;i++)
 	{
 
-		format['contenu']= raw[ligne]["text"];
-		format[ligne]['locx']= raw[ligne]["geo"]; // A CHANGER
-		format[ligne]['locy']= raw[ligne]["geo"]; // IDEM
+		if(raw[i]["coordinates"] !== undefined && raw[i]["coordinates"] !== null )
+		{
+		format.push({});
 
-		format[ligne]['url']="https://twitter.com/iagdotme/status/"+raw[ligne]["id"];
+		format[ligne]['contenu']= raw[i]["text"];
+		format[ligne]['locx']= raw[i]["coordinates"]["coordinates"][1]; // A CHANGER
+		format[ligne]['locy']= raw[i]["coordinates"]["coordinates"][0]; // IDEM
+
+		format[ligne]['url']="https://twitter.com/iagdotme/status/"+raw[i]["id"];
 
 		//format['contenu']= "https://twitter.com/intent/user?user_id="+raw[ligne]["user"]["id"];
-		format[ligne]['user']= raw[ligne]["user"]["name"];
-		format[ligne]['date']= raw[ligne]["created_at"];
+		format[ligne]['user']= raw[i]["user"]["name"];
+		format[ligne]['date']= raw[i]["created_at"];
 		format[ligne]['mail']= "";
 		format[ligne]['source']= "Twitter";
 
+		ligne++;
+	}
 
 
 
@@ -27,7 +34,7 @@ function twitter2format(raw)
 
 		raw=[];
 	return format;
-	
+
 }
 
 

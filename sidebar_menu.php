@@ -102,8 +102,34 @@
 //========================================================================================================================================================================================= -->
 
 			</div>
+			<?php include("./format.php"); ?>
 			<div class="sidebar-pane" id="result">
 				<h1>Resultats</h1>
+				<script>
+				url = "./twitter.php";
+				// Send the data using post
+				var posting = $.get( url, {pos_lat : "48.8246944", pos_long : "2.274335199999996", time_begin : "2016-04-14", time_end : "2016-04-15", radius :"20" }) ;
+				setTimeout( function(){
+				//console.log(posting.responseText);
+				var JJtweets;
+				JJtweets=JSON.parse(posting.responseText);
+				JJtweets=twitter2format(JJtweets);
+
+				console.log(JJtweets);
+
+				var carteTwitter=L.markerClusterGroup({
+				   spiderfyOnMaxZoom: false,
+				    showCoverageOnHover: false,
+				    zoomToBoundsOnClick: false});
+				traceLayer(carteTwitter,JJtweets,map);
+carteTwitter.on('clusterclick',ecritSidePanel(carteTwitter));
+
+			}, 2000);
+				</script>
+
+				<div id="results">
+				</div>
+
 		  </div>
 
 </div>

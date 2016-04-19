@@ -37,9 +37,7 @@
 
 // centre la carte sur l'ENSTA
   var center_x = 2.2187066;
-  var center_x = -105.02; // USA
   var center_y = 48.7110092;
-  var center_y = 40.5; //USA
 
   var center_z = 12; // d�finition du zoom
 
@@ -76,7 +74,7 @@ var points=[];
 
 
 
-
+afficheTexteLayer(donnees);
 
 map.addLayer(nomlayer);
 
@@ -103,28 +101,92 @@ function dessinepopup(texte)
 
 }
 
+function afficheTexteLayer(donnees)
+{
+	var contenu="";
+	for(ligne=0;ligne<donnees.length;ligne++)
+				{
+					contenu+=dessinepopup(donnees[ligne]);
+				}
+
+			document.getElementById("results").innerHTML =contenu;
+
+}
 
 
 
-donnees=[{locx:40.65 , locy: -105.02,contenu:"test",date:"aujourd'hui"},
-			{locx:40.65 , locy: -104.02,contenu:"test",date:"aujourd'hui"},
-			{locx:41.65 , locy: -104.02,contenu:"test",date:"aujourd'hui"},
-			{locx:41.65 , locy: -105.02,contenu:"test",date:"aujourd'hui"},
+
+donnees=[{locx:40.65 , locy: 2,contenu:"test",date:"aujourd'hui"},
+			{locx:40.65 , locy: 2.5,contenu:"test",date:"aujourd'hui"},
+			{locx:41.65 , locy: 2,contenu:"test",date:"aujourd'hui"},
+			{locx:41.65 , locy: 2.5,contenu:"test",date:"aujourd'hui"},
 
 
 ];
-var twitter_layer=L.markerClusterGroup({
+var cartebidon=L.markerClusterGroup({
    spiderfyOnMaxZoom: false,
     showCoverageOnHover: false,
     zoomToBoundsOnClick: false});
 
 
-traceLayer(twitter_layer,donnees,map);
+traceLayer(cartebidon,donnees,map);
 
-L.circle([40.65, -104.02], 50000).addTo(map);
+L.circle([40.65, -104.02], 300000).addTo(map);
 
 
-		twitter_layer.on('clusterclick', function (e) {
+function contenuCluster(e)
+{
+	contenu="";
+	var ligne;
+
+	console.log(e);
+
+
+	if(e._childClusters.length ==0) // on est pas dans un cluster
+	{
+		for(ligne=0;ligne<e._markers.length;ligne++)
+				{
+					contenu+=e._markers[ligne]._popup._content+"<br/><br/>";
+				}
+	}
+	else
+	{
+		for (ligne=0;ligne<e._childClusters.length;ligne++)
+		{
+
+			contenu+=contenuCluster(e._childClusters[ligne]);
+
+		}
+	}
+
+
+		return contenu;
+
+}
+
+function ecritSidePanel(carte)
+{
+  //twitter_layer.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+  //alert('cluster ' + a.layer.getAllChildMarkers().length);
+
+
+    // ATTENTION AU ZERO, c'est un tavbleau a balayer
+
+    var contenu="<b>Nombre elements: "+ carte.layer._childCount+"</b><br/><br/>";
+    contenu+=contenuCluster(carte.layer);
+
+
+  document.getElementById("results").innerHTML =contenu;
+
+  /*L.popup()
+    .setLatLng(e.latlng)
+    .setContent(contenu)
+    .openOn(map);*/
+
+}
+
+
+		cartebidon.on('clusterclick', function (e) {
 
 			//twitter_layer.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 			//alert('cluster ' + a.layer.getAllChildMarkers().length);
@@ -132,17 +194,16 @@ L.circle([40.65, -104.02], 50000).addTo(map);
 
 				// ATTENTION AU ZERO, c'est un tavbleau a balayer
 
-				var contenu="<b>nb element: "+ e.layer._childClusters[0]._childCount+"</b><br/><br/>";
-				var ligne=0;
+				var contenu="<b>Nombre elements: "+ e.layer._childCount+"</b><br/><br/>";
+				contenu+=contenuCluster(e.layer);
 
-				for(ligne=0;ligne<e.layer._childClusters[0]._childCount;ligne++)
-				{
-					contenu+=e.layer._childClusters[0]._markers[ligne]._popup._content+"<br/><br/>";
-				}
-			L.popup()
+
+			document.getElementById("results").innerHTML =contenu;
+
+			/*L.popup()
 				.setLatLng(e.latlng)
 				.setContent(contenu)
-				.openOn(map);
+				.openOn(map);*/
 
 		});
 
@@ -241,7 +302,7 @@ L.circle([40.65, -104.02], 50000).addTo(map);
   });
 
 
-
+/*
 // fonction permettant, au moment o� l'on clique sur une ligne du tableau contenant les r�sultats de recherche pour NOMINATIM, de faire apparaitre le marker en y incluant un popup qui apparait lorsqu'on clique sur le marker
 	$(document).on('click', '#nominatim-table tr', function() {
       $(this).closest("tr").siblings().removeClass("highlighted");
@@ -273,6 +334,8 @@ $(document).on('click', '#res_loc tr', function() {
     	L.marker([y, x],{icon: pulsingIcon}).addTo(map).bindPopup("<STRONG> G&eacuteolocalisation de "+heure+"</STRONG></BR>D°D LAT : "+y+" - LONG : "+x+"</BR>D°M.M' LAT : "+ConvertDDToDMM(y)+" - LONG : "+ConvertDDToDMM(x)+"</BR>D°M'S'' LAT : "+ConvertDDToDMS(y)+" - LONG : "+ConvertDDToDMS(x)+"</br> T&eacutel&eacutephone : "+tel+"</br> Altitude : "+alt+" m</br> Commune : "+com+"</br> Unit&eacute comp&eacutetente : "+bp);
 	}
 });
+
+*/
 
 
 
@@ -311,7 +374,7 @@ map.on('dblclick', function(e) {
         map.addLayer(drawnItems);
 
         // Set the title to show on the polygon button
-        L.drawLocal.draw.toolbar.buttons.polygon = 'Draw a circle!';
+        L.drawLocal.draw.toolbar.buttons.polygon = 'Dessine un cercle!';
 
         var drawControl = new L.Control.Draw({
             position: 'topright',
@@ -351,15 +414,20 @@ map.on('dblclick', function(e) {
         });
 
         map.on('draw:edited', function (e) {
+
+			console.log(e);
+			document.getElementById("locx").value=e.layers._layers[80].getLatLng()["lat"];
+			document.getElementById("locy").value=e.layers._layers[80].getLatLng()["lng"];
+			document.getElementById("rayon").value=e.layers._layers[80].getRadius();
+
+
             var layers = e.layers;
             var countOfEditedLayers = 0;
             layers.eachLayer(function(layer) {
                 countOfEditedLayers++;
             });
 
-			document.getElementById("locx").value=e.layer.getLatLng()["lat"];
-			document.getElementById("locy").value=e.layer.getLatLng()["lng"];
-			document.getElementById("rayon").value=e.layer._radius;
+
 
             console.log("Edited " + countOfEditedLayers + " layers");
         });

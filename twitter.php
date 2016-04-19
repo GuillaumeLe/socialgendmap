@@ -2,6 +2,7 @@
 
 use Abraham\TwitterOAuth\TwitterOAuth;
 
+
 function getConnectionWithAccessToken($oauth_token, $oauth_token_secret) {
   $connection = new TwitterOAuth( "1CrsIZMrUwTxKiLCVJ4l1e3C7", "KMXjQjvGmAiPOBYUCjRwEGIEQRiOmdERUob95aKJ1jvLVyBhTY", $oauth_token, $oauth_token_secret);
   return $connection;
@@ -16,5 +17,12 @@ function get_tweets($pos_lat, $pos_long, $time_begin, $time_end, $radius){
   $data = json_encode((array)$content);
   return $data;
 }
-// print_r(get_tweets(48.8246944,2.274335199999996,"2016-04-14","2016-04-15",20));
+
+$pos_lat = $_GET["pos_lat"];
+$pos_long = $_GET["pos_long"];
+$time_begin = $_GET["time_begin"];
+$time_end = $_GET["time_end"];
+$radius = $_GET["radius"];
+
+print_r(get_tweets($pos_lat,$pos_long,$time_begin,$time_end,$radius));
 ?>

@@ -6,7 +6,7 @@
         <ul class="sidebar-tabs" role="tablist">
             <li><a href="#social" role="tab"><i class="fa fa-users"></i></a></li>
             <li><a href="#search" role="tab"><i class="fa fa-search"></i></a></li>
-						<li><a href="#result" role="tab"><i class="fa fa-search"></i></a></li>
+						<li><a href="#solution" role="tab"><i class="icon-archive"></i></a></li>
 	    </ul>
 
         <!-- Tab panes -->
@@ -102,6 +102,7 @@
 //========================================================================================================================================================================================= -->
 
 			</div>
+
 			<?php include("./format.php"); ?>
 			<div class="sidebar-pane" id="result">
 				<h1>Resultats</h1>
@@ -129,6 +130,7 @@ carteTwitter.on('clusterclick',ecritSidePanel(carteTwitter));
 
 				<div id="results">
 				</div>
+
 
 		  </div>
 

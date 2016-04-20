@@ -22,9 +22,8 @@
 <!--[if lte IE 8]><link rel="stylesheet" href="./js/Leaflet.Coordinates/dist/Leaflet.Coordinates-0.1.4.ie.css" /><![endif]-->
 <!--feuille de style table-->
 <link rel="stylesheet" href="./css/table.css" />
-<!--bibliothèque intl-tel-input pour affichage menu envoi sms-->
-<script src="./js/intl-tel-input/build/js/intlTelInput.js"></script>
-<link rel="stylesheet" href="./js/intl-tel-input/build/css/intlTelInput.css">
+
+<link rel="stylesheet" href="./css/style.css" />
 <!--bibliothèque styledLayerControl pour affichage menu couches geo-->
 
 

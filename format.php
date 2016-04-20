@@ -18,7 +18,7 @@ function twitter2format(raw)
 		format[ligne]['locy']= raw[i]["coordinates"]["coordinates"][0]; // IDEM
 
 
-		format[ligne]['url']="https://twitter.com/#!/"+  raw[i]["user"]["id_str"] + "/status/"+raw[i]["id"];
+		format[ligne]['url']="https://twitter.com/#!/"+  raw[i]["user"]["id_str"] + "/status/"+raw[i]["id_str"];
 
 		//format['contenu']= "https://twitter.com/intent/user?user_id="+raw[ligne]["user"]["id"];
 		format[ligne]['user']= raw[i]["user"]["name"];

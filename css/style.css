@@ -1,7 +1,7 @@
 div.tweet
 {
   display:inline-block;
-  width:250px;
+  width:330px;
 
   padding-left: 10px;
   padding-right: 10px;
@@ -15,11 +15,15 @@ div.tweet
   margin-bottom:5px;
 
   background-color: #ecf0f1;/*cloud*/
-
+  transition: 0.4s;
 
   text-align:justify;
 }
 
+.tweet:hover {
+    background-color: #fcf5f5;/*cloud*/
+    transition: 0.4s;
+    }
 
 .tweet hr
  {
@@ -71,8 +75,31 @@ div.tweet
 	
 }
 
+div.tweet a:hover {
+    transform-origin: 50% 50%;
+    transform: scale(1.2, 1.2);
+    transition: 0.4s;
+    }
 
+.leaflet-popup-content-wrapper {
+    width: 400px;
+    
+    }
 
+#social input {
+    padding: 10px;
+    border: 1px solid #5886c2;
+    border-radius: 0.8em;
+    color:  #5886c2;
+    transition: 0.4s;
+    box-shadow: 3px 3px 3px rgba(190,190,190,0.7);
+    }
+
+#social input:hover {
+    border-color: #98aedf;
+    color: #98aedf;
+    transition: 0.4s;
+}
 
 
 

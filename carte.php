@@ -104,12 +104,13 @@ nomlayer.on('clusterclick', function (e) {ecritSidePanel(e);});
 function dessinepopup(texte)
 {
 	bulle="<div class='tweet'><p>";
-	bulle+=texte["contenu"];
+	bulle+='<iframe frameborder=0 src="http://twitframe.com/show?url=' + encodeURIComponent(texte["url"]) + "\"  width=300px height=300px > Votre navigateur ne peut pas afficher cette page </iframe><br/>";
+
 	bulle+= '<hr/>';
-	bulle+= 'Date: ' + texte["date"] + " ; ";
+	bulle+= 'Date: ' + texte["date"] + " ; <br/>";
 	bulle+= 'x:' + texte["locx"] + ' ; y:' + texte["locy"] + '<br/>';
 	bulle+='Utilisateur: ' + texte["user"] + "<br/>";
-	bulle+='URL: ' + texte["url"] + "<br/>";
+	bulle+='URL: <a target="_blank" href=\'' + texte["url"] + "'> Voir le lien </a><br/>";
 	bulle+='<hr/>';
 	bulle+='<a class="btn btn-star" href="#"><i class="fa fa-star-o fa-3x"></i></a>';
 	bulle+='<a class="btn btn-envelope" target=_blank href="'+texte['url']+'"><i class="fa fa-envelope-o fa-3x"></i></a>'; // enlever si mail est vide
@@ -136,22 +137,22 @@ function afficheTexteLayer(donnees)
 
 
 
-donnees=[{locx:40.65 , locy: 2,contenu:"test",date:"aujourd'hui"},
-			{locx:40.65 , locy: 2.5,contenu:"test",date:"aujourd'hui"},
-			{locx:41.65 , locy: 2,contenu:"test",date:"aujourd'hui"},
-			{locx:41.65 , locy: 2.5,contenu:"test",date:"aujourd'hui"},
+//donnees=[{locx:40.65 , locy: 2,contenu:"test",date:"aujourd'hui"},
+//			{locx:40.65 , locy: 2.5,contenu:"test",date:"aujourd'hui"},
+//			{locx:41.65 , locy: 2,contenu:"test",date:"aujourd'hui"},
+//			{locx:41.65 , locy: 2.5,contenu:"test",date:"aujourd'hui"},
+//
+//
+//];
+//var cartebidon=L.markerClusterGroup({
+//   spiderfyOnMaxZoom: false,
+//    showCoverageOnHover: false,
+//    zoomToBoundsOnClick: false});
+//
+//
+//traceLayer(cartebidon,donnees,map);
 
-
-];
-var cartebidon=L.markerClusterGroup({
-   spiderfyOnMaxZoom: false,
-    showCoverageOnHover: false,
-    zoomToBoundsOnClick: false});
-
-
-traceLayer(cartebidon,donnees,map);
-
-L.circle([40.65, -104.02], 300000).addTo(map);
+//L.circle([40.65, -104.02], 300000).addTo(map);
 
 
 function contenuCluster(e)

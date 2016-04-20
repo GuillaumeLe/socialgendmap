@@ -20,9 +20,9 @@
 				<h3><input type="checkbox" name="gendloc" value="gendloc"><i class="fa fa-globe"></i> Gendloc<br></h3>
 				<h3><input type="checkbox" name="gendarmeries" value="gendarmeries"><i class="fa fa-bell"></i> Gendarmeries<br></h3>
 
-                </br></br>
+                
 
-                <p>Localisation :</br></p>
+                <h1>Localisation</h1>
 				<p>Latitude :</br><INPUT type="text" name="locx" id="locx" autofocus value="48.821332549646634">
 				</p>
 				<p>Longitude :</br><INPUT type="text" name="locy" id="locy" autofocus value="2.5323486328125">
